@@ -46,11 +46,11 @@ function checkScore(userChoice, computerChoice) {
         console.log("tie");
     }
     else if ((userChoice === "rock" && computerChoice === "scissor") || (userChoice === "scissor" && computerChoice === "paper") || (userChoice === "paper" && computerChoice === "rock")) {
-        console.log(`You Win! ${userChoice} beats ${computerChoice}`);
+        console.log(`${userChoice} beats ${computerChoice}`);
         return "user";
     }
     else if ((userChoice === "scissor" && computerChoice === "rock") || (userChoice === "paper" && computerChoice === "scissor") || (userChoice === "rock" && computerChoice === "paper")) {
-        console.log(`You Lose! ${computerChoice} beats ${userChoice}`);
+        console.log(`${computerChoice} beats ${userChoice}`);
         return "computer"
     }
 }
