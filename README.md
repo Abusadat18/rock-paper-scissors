@@ -1,2 +1,2 @@
 # rock-paper-scissors
-rock-paper-scissors game
+Please open the console to see the results while playing the game .
