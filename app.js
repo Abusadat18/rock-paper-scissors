@@ -1,13 +1,15 @@
-// ALGO
+let userScore = 0; 
+let computerScore = 0; 
 
-// Input from user
-function getUserChoice() {
-    let userChoice = prompt("Choose either Rock | Paper | Scissor");
-    userChoice = userChoice.toLowerCase();
-    return userChoice;
-}
+const choiceBtns = document.querySelectorAll(".choice");
+const resultDiv = document.querySelector(".result");
+const userScoreResult = document.querySelector(".user-score");
+const compScoreResult = document.querySelector(".computer-score");
 
-// Random input from computer
+choiceBtns.forEach((btn) => {
+        btn.addEventListener("click", playRound);
+})
+
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissor"];
     const randomNumber = Math.floor(Math.random() * 3);
@@ -15,12 +17,8 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function startGame() {
-    let userScore = 0; 
-    let computerScore = 0; 
-
-    while (userScore < 5 && computerScore < 5) {
-        const userChoice = getUserChoice();
+function playRound(e) { 
+        const userChoice = e.target.dataset.key;
         const computerChoice = getComputerChoice();
         let scoreValue = checkScore(userChoice, computerChoice);
 
@@ -30,42 +28,49 @@ function startGame() {
         else if (scoreValue === "computer") {
             computerScore++;
         }
-
         showScore(userScore, computerScore);
-        getWinner(userScore, computerScore);
-    }
 }
 
 function showScore(userScore, computerScore) {
-    console.log(`User score is: ${userScore}`);
-    console.log(`Computer score is: ${computerScore}`);
+    userScoreResult.textContent = `User score is: ${userScore}`;
+    compScoreResult.textContent = `Computer score is: ${computerScore}`;
+    getWinner(userScore, computerScore);
 }
 
 function checkScore(userChoice, computerChoice) {
     if (userChoice === computerChoice) {
-        console.log("tie");
+        displayResult("tie");
     }
     else if ((userChoice === "rock" && computerChoice === "scissor") || (userChoice === "scissor" && computerChoice === "paper") || (userChoice === "paper" && computerChoice === "rock")) {
-        console.log(`${userChoice} beats ${computerChoice}`);
+        displayResult(`${userChoice} beats ${computerChoice}`)
         return "user";
     }
     else if ((userChoice === "scissor" && computerChoice === "rock") || (userChoice === "paper" && computerChoice === "scissor") || (userChoice === "rock" && computerChoice === "paper")) {
-        console.log(`${computerChoice} beats ${userChoice}`);
+        displayResult(`${computerChoice} beats ${userChoice}`);
         return "computer"
     }
 }
 
 function getWinner(userScore, computerScore) {
     if (userScore === 5) {
-        console.log("User Wins")
+        removeEvtListner();
+        displayResult("You Win")
     }
     else if (computerScore === 5) {
-        console.log("Computer Wins");
+        removeEvtListner();
+        displayResult("Computer Wins");
     }
 }
 
-// START THE GAME
-startGame();
+function removeEvtListner() {
+    choiceBtns.forEach((btn) => {
+        btn.removeEventListener("click", playRound);
+    })
+}
+
+function displayResult(text) {
+    resultDiv.textContent = text;
+}
 
 
 
