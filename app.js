@@ -2,6 +2,7 @@ let userScore = 0;
 let computerScore = 0; 
 
 const choiceBtns = document.querySelectorAll(".choice");
+const computerChoiceResult = document.querySelector(".comp-choice");
 const resultDiv = document.querySelector(".result");
 const userScoreResult = document.querySelector(".user-score");
 const compScoreResult = document.querySelector(".computer-score");
@@ -14,6 +15,7 @@ function getComputerChoice() {
     const choices = ["rock", "paper", "scissor"];
     const randomNumber = Math.floor(Math.random() * 3);
     const computerChoice = choices[randomNumber];
+    computerChoiceResult.textContent = `Computer chose ${computerChoice}`;
     return computerChoice;
 }
 
